@@ -32,7 +32,7 @@
             </div>
             <div id="image-container">
                 <canvas class="graph-canvas" width="300" height="240"></canvas>
-                <svg width="300" height="240" class="svg-graph" xmlns="http://www.w3.org/2000/svg">
+                <svg id="graph-svg" width="300" height="240" class="svg-graph" xmlns="http://www.w3.org/2000/svg">
 
                     <line class="axis" x1="0" x2="300" y1="120" y2="120" stroke="black"></line>
                     <line class="axis" x1="150" x2="150" y1="0" y2="300" stroke="black"></line>

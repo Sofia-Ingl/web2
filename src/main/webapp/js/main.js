@@ -57,19 +57,23 @@ $(function() {
 	function drawDot(x, y, r) {
 		const CENTER_X = 150;
 		const CENTER_Y = 120;
-		let dot = $("#dot");
 		if (isNumber(x) && isNumber(y) && isNumber(r) && x>=MIN_X && x<=MAX_X) {
 			let relativeX = x*100/r;
 			let relativeY = y*100/r;
 			let absoluteX = CENTER_X + Math.round(relativeX);
 			let absoluteY = CENTER_Y - Math.round(relativeY);
-			dot.attr("r", 3);
-			dot.attr("cx", absoluteX);
-			dot.attr("cy", absoluteY);
+			drawDotInAbsoluteCoord(absoluteX, absoluteY);
 
 		} else {
 			$("#dot").attr("r", 0);
 		}
+	}
+
+	function drawDotInAbsoluteCoord(absoluteX, absoluteY) {
+		let dot = $("#dot");
+		dot.attr("r", 3);
+		dot.attr("cx", absoluteX);
+		dot.attr("cy", absoluteY);
 	}
 
 
@@ -78,9 +82,19 @@ $(function() {
 	});
 
 	$("#values-form").on("submit", function(event) {
-
 		if (!validateData()) event.preventDefault();
 
+	});
+
+	$(".svg-graph").on("click", function (event) {
+
+		let graph = document.getElementById("graph-svg");
+		let boundingRect = graph.getBoundingClientRect();
+		let body = document.body;
+
+		let dx = Math.round((event.pageX - (boundingRect.left + body.scrollLeft))*100)/100;
+		let dy = Math.round((event.pageY - (boundingRect.top + body.scrollTop))*100)/100;
+		drawDotInAbsoluteCoord(dx, dy);
 	});
 
 
