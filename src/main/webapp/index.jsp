@@ -83,7 +83,9 @@
                             cy = String.valueOf(120 - Math.round(entryBean.getY()*100/entryBean.getR()));
                             System.out.println(cy);
                     %>
-                        <circle r="3" cx=<%=cx%> cy=<%=cy%> class="prev-dot" fill="#3a3e40"></circle>
+
+                    <circle r="3" cx=<%=cx%> cy=<%=cy%> class="prev-dot" fill="#3a3e40"></circle>
+
                     <%}%>
                 </svg>
             </div>

@@ -65,27 +65,20 @@ $(function () {
         return parseFloat($("#r-options").val());
     }
 
-    function drawDot(x, y, r) {
-        const CENTER_X = 150;
-        const CENTER_Y = 120;
-        let dot = $("#dot");
+    function drawDot(dot, x, y, r) {
         if (isNumber(x) && isNumber(y) && isNumber(r) && x >= MIN_X && x <= MAX_X) {
-            let relativeX = x * 100 / r;
-            let relativeY = y * 100 / r;
-            let absoluteX = CENTER_X + Math.round(relativeX);
-            let absoluteY = CENTER_Y - Math.round(relativeY);
-            drawDotInAbsoluteCoord(absoluteX, absoluteY);
+            let {absoluteX, absoluteY} = getAbsoluteOffsetFromXYCoords(x, y, r);
+            drawDotInAbsoluteCoord(dot, absoluteX, absoluteY);
 
         } else {
-            dot.attr("r", 0);
+            dot.r = 0;
         }
     }
 
-    function drawDotInAbsoluteCoord(absoluteX, absoluteY) {
-        let dot = $("#dot");
-        dot.attr("r", 3);
-        dot.attr("cx", absoluteX);
-        dot.attr("cy", absoluteY);
+    function drawDotInAbsoluteCoord(dot, absoluteX, absoluteY) {
+        dot.r = 3
+        dot.cx = absoluteX;
+        dot.cy = absoluteY;
         alert("lol")
     }
 
@@ -105,11 +98,28 @@ $(function () {
         }
     }
 
+    function getAbsoluteOffsetFromXYCoords(x, y, r) {
+        const CENTER_X = 150;
+        const CENTER_Y = 120;
+        let relativeX = x * 100 / r;
+        let relativeY = y * 100 / r;
+        return {
+            absoluteX : CENTER_X + Math.round(relativeX),
+            absoluteY : CENTER_Y - Math.round(relativeY)
+        }
+    }
+
     function redrawDotsAfterRChanged() {
-        let dots = $(".prev-dot");
-        dots.each(function (i, dot){
-            alert(dot.getAttribute("cx"));
-            //drawDot(getX(), getY(), getR());
+        document.querySelectorAll("circle").forEach(e => e.remove());
+        let x, y, r;
+        let svg = document.getElementById("graph-svg");
+        $("#result-table tbody tr").each(function (index, row) {
+            alert(row.cells[0].innerText);
+            x = parseFloat(row.cells[0].innerText);
+            y = parseFloat(row.cells[1].innerText);
+            r = getR();
+            let {absoluteX, absoluteY} = getAbsoluteOffsetFromXYCoords(x, y, r);
+            svg.insertAdjacentHTML('beforeend', `<circle r="3" cx=${absoluteX} cy=${absoluteY} class="prev-dot" fill="#3a3e40"></circle>`)
         });
     }
 
@@ -131,7 +141,7 @@ $(function () {
         let dx = Math.round((event.pageX - (boundingRect.left + body.scrollLeft)) * 100) / 100;
         let dy = Math.round((event.pageY - (boundingRect.top + body.scrollTop)) * 100) / 100;
         let r = getR();
-        drawDotInAbsoluteCoord(dx, dy);
+        drawDotInAbsoluteCoord($("#dot"), dx, dy);
 
         let {x, y} = getXYCoordsFromAbsoluteOffset(dx, dy, r);
         setGraphModeOnForm(x, y);
@@ -140,8 +150,8 @@ $(function () {
 
 
     $("#r-options").on("change", function () {
-        drawDot(getX(), getY(), getR());
-        redrawDotsAfterRChanged();
+        drawDot($("#dot"), getX(), getY(), getR());
+        //redrawDotsAfterRChanged();
     });
 
     $("#x-input").on("keypress", function (event) {
@@ -152,11 +162,11 @@ $(function () {
     });
 
     $("#x-input").on("input", function () {
-        drawDot(getX(), getY(), getR());
+        drawDot($("#dot"), getX(), getY(), getR());
     });
 
     $("#yradio").on("change", function () {
-        drawDot(getX(), getY(), getR());
+        drawDot($("#dot"), getX(), getY(), getR());
     })
 
 });
