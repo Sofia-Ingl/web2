@@ -22,6 +22,11 @@ $(function () {
 
     function validateY() {
 
+        let graphMode = $(".graph_point_info").val();
+        let y = parseFloat($("#graph-y").val());
+        if (graphMode === "true" && isNumber(y)) {
+            return true;
+        }
         return $("input[type='radio']").is(":checked");
 
     }

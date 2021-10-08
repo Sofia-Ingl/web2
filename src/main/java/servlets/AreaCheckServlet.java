@@ -9,13 +9,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.time.LocalDateTime;
-import java.time.Period;
-import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
 import java.util.Locale;
+
+import static java.lang.Float.NaN;
 
 public class AreaCheckServlet extends HttpServlet {
 
@@ -43,7 +41,12 @@ public class AreaCheckServlet extends HttpServlet {
         try {
 
             double x = Double.parseDouble(req.getParameter("x").replace(",", "."));
-            double y = Double.parseDouble(req.getParameter("y").replace(",", "."));
+            double y;
+            if (req.getParameter("graph").equals("true")) {
+                y = Double.parseDouble(req.getParameter("graphY").replace(",", "."));
+            } else {
+                y = Double.parseDouble(req.getParameter("y").replace(",", "."));
+            }
             double r = Double.parseDouble(req.getParameter("r").replace(",", "."));
             if (validateValues(x, y, r)) {
                 boolean isHit = checkData(x, y, r);
@@ -91,7 +94,6 @@ public class AreaCheckServlet extends HttpServlet {
 
     private boolean validateValues(double x, double y, double r) {
         boolean areNumbers = !Double.isNaN(x) && !Double.isNaN(y) && !Double.isNaN(r);
-        boolean inLimits = areNumbers && x<=5 && x>=-3 && y<=5 && y>=-3 && rVals.contains(r);
-        return inLimits;
+        return areNumbers && x<=5 && x>=-3 && y<=5 && y>=-3 && rVals.contains(r);
     }
 }
