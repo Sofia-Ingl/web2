@@ -140,6 +140,8 @@
                         <input type="radio" id="y5" name="y" value="5">
                         <label for="y5">5</label>
 
+                        <input type="hidden" id="graph-y" name="graphY" value="">
+
                     </div>
                 </div>
 
@@ -161,6 +163,7 @@
 
                 <div class="invisible">
                     <input class="clear_info" type="hidden" name="clear" value="false">
+                    <input class="graph_point_info" type="hidden" name="graph" value="false">
                 </div>
 
                 <div id="main-button-block">
