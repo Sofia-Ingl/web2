@@ -68,6 +68,7 @@ $(function () {
     function drawDot(x, y, r) {
         const CENTER_X = 150;
         const CENTER_Y = 120;
+        let dot = $("#dot");
         if (isNumber(x) && isNumber(y) && isNumber(r) && x >= MIN_X && x <= MAX_X) {
             let relativeX = x * 100 / r;
             let relativeY = y * 100 / r;
@@ -76,7 +77,7 @@ $(function () {
             drawDotInAbsoluteCoord(absoluteX, absoluteY);
 
         } else {
-            $("#dot").attr("r", 0);
+            dot.attr("r", 0);
         }
     }
 
@@ -85,6 +86,7 @@ $(function () {
         dot.attr("r", 3);
         dot.attr("cx", absoluteX);
         dot.attr("cy", absoluteY);
+        alert("lol")
     }
 
     function setGraphModeOnForm(x, y) {
@@ -101,6 +103,14 @@ $(function () {
             x: Math.round(((absoluteXOffset - CENTER_X)*r/100)*1000)/1000,
             y: Math.round(((CENTER_Y - absoluteYOffset)*r/100)*1000)/1000
         }
+    }
+
+    function redrawDotsAfterRChanged() {
+        let dots = $(".prev-dot");
+        dots.each(function (i, dot){
+            alert(dot.getAttribute("cx"));
+            //drawDot(getX(), getY(), getR());
+        });
     }
 
     $("button.reset").on("click", function () {
@@ -124,13 +134,14 @@ $(function () {
         drawDotInAbsoluteCoord(dx, dy);
 
         let {x, y} = getXYCoordsFromAbsoluteOffset(dx, dy, r);
-        //alert(x+" "+y);
         setGraphModeOnForm(x, y);
+        $("button.submit").click();
     });
 
 
     $("#r-options").on("change", function () {
         drawDot(getX(), getY(), getR());
+        redrawDotsAfterRChanged();
     });
 
     $("#x-input").on("keypress", function (event) {
