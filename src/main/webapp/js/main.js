@@ -71,15 +71,14 @@ $(function () {
             drawDotInAbsoluteCoord(dot, absoluteX, absoluteY);
 
         } else {
-            dot.r = 0;
+            dot.attr("r", 0);
         }
     }
 
     function drawDotInAbsoluteCoord(dot, absoluteX, absoluteY) {
-        dot.r = 3
-        dot.cx = absoluteX;
-        dot.cy = absoluteY;
-        alert("lol")
+        dot.attr("r", 3);
+        dot.attr("cx", absoluteX);
+        dot.attr("cy", absoluteY);
     }
 
     function setGraphModeOnForm(x, y) {
@@ -114,7 +113,6 @@ $(function () {
         let x, y, r;
         let svg = document.getElementById("graph-svg");
         $("#result-table tbody tr").each(function (index, row) {
-            alert(row.cells[0].innerText);
             x = parseFloat(row.cells[0].innerText);
             y = parseFloat(row.cells[1].innerText);
             r = getR();
