@@ -39,6 +39,12 @@ $(function () {
     function getY() {
         if ($("input[type='radio']").is(":checked")) {
             return parseFloat($("input[type='radio']:checked").val());
+        } else {
+            let graphMode = $(".graph_point_info").val();
+            let y = parseFloat($("#graph-y").val());
+            if (graphMode === "true" && isNumber(y)) {
+                return y;
+            }
         }
         return NaN;
     }
@@ -83,6 +89,7 @@ $(function () {
 
     function setGraphModeOnForm(x, y) {
         $(".graph_point_info").val("true");
+        $("input[type='radio']").prop("checked", false);
         $("#graph-y").val(y);
         $("#x-input").val(x);
     }
@@ -101,7 +108,7 @@ $(function () {
     });
 
     $("#values-form").on("submit", function (event) {
-        if (!validateData()) event.preventDefault();
+        if (!validateData() && event.target.getAttribute("class").indexOf("reset")===-1) event.preventDefault();
 
     });
 
