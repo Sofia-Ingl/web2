@@ -1,5 +1,4 @@
 <%@ page import="beans.EntryBean" %>
-<%@ page import="java.util.ArrayList" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%--<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>--%>
 <jsp:useBean id="tableRows" class="beans.EntryBeansContainer" scope="session"/>
@@ -73,19 +72,22 @@
                     <polygon class="svg-figure triangle" points="100,120 150,120 150,170"
                              fill="#ebe5d5" fill-opacity="0.5" stroke="#d49c6b"></polygon>
 
-                    <circle r="0" cx="150" cy="120" id="dot" fill="#bc012a"></circle>
+                    <circle r="0" cx="150" cy="120" id="dot" fill="#866fd7"></circle>
 
                     <%
                         String cx;
                         String cy;
+                        String fill;
+                        double r = (session.getAttribute("r")==null)? 1 : Double.parseDouble((String)session.getAttribute("r"));
                         for (EntryBean entryBean : tableRows.getEntryBeansContainer()) {
-                            cx = String.valueOf(150 + Math.round(entryBean.getX() * 100 / entryBean.getR()));
+                            cx = String.valueOf(150 + Math.round(entryBean.getX() * 100 / r));
                             System.out.println(cx);
-                            cy = String.valueOf(120 - Math.round(entryBean.getY() * 100 / entryBean.getR()));
+                            cy = String.valueOf(120 - Math.round(entryBean.getY() * 100 / r));
                             System.out.println(cy);
+                            fill = (r == entryBean.getR())?"#ffd200":"#3a3e40";
                     %>
 
-                    <circle r="3" cx=<%=cx%> cy=<%=cy%> class="prev-dot" fill="#3a3e40"></circle>
+                    <circle r="3" cx=<%=cx%> cy=<%=cy%> class="prev-dot" fill=<%=fill%>></circle>
 
                     <%}%>
                 </svg>
@@ -99,7 +101,7 @@
                 <span>Form</span>
             </div>
 
-            <form id="values-form" action="/web2-0" method="GET">
+            <form id="values-form" action="${pageContext.request.contextPath}" method="GET">
 
                 <div id="x-block">
                     <div id="xlabel" class="form-labels">
