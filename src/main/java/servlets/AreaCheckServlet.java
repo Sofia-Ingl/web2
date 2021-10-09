@@ -68,6 +68,9 @@ public class AreaCheckServlet extends HttpServlet {
                         tableRows.getEntryBeansContainer()) {
                     System.out.println(e);
                 }
+
+                req.getSession().setAttribute("r", String.valueOf(Math.round(r)));
+                System.out.println("R: " + req.getSession().getAttribute("r"));
             }
 
         } catch (NumberFormatException e) {

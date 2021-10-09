@@ -1,4 +1,5 @@
 <%@ page import="beans.EntryBean" %>
+<%@ page import="java.util.ArrayList" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%--<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>--%>
 <jsp:useBean id="tableRows" class="beans.EntryBeansContainer" scope="session"/>
@@ -77,10 +78,10 @@
                     <%
                         String cx;
                         String cy;
-                        for (EntryBean entryBean: tableRows.getEntryBeansContainer()) {
-                            cx = String.valueOf(150 + Math.round(entryBean.getX()*100/entryBean.getR()));
+                        for (EntryBean entryBean : tableRows.getEntryBeansContainer()) {
+                            cx = String.valueOf(150 + Math.round(entryBean.getX() * 100 / entryBean.getR()));
                             System.out.println(cx);
-                            cy = String.valueOf(120 - Math.round(entryBean.getY()*100/entryBean.getR()));
+                            cy = String.valueOf(120 - Math.round(entryBean.getY() * 100 / entryBean.getR()));
                             System.out.println(cy);
                     %>
 
@@ -154,11 +155,25 @@
                     </div>
                     <div id="rselection" class="input-areas">
                         <select id="r-options" name="r" size="1" required>
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                            <option>5</option>
+
+                            <%
+                                String[] options = (String[]) session.getAttribute("options");
+                                if (options == null) {
+                                    options = new String[]{"1", "2", "3", "4", "5"};
+                                    session.setAttribute("options", options);
+                                }
+                                String sessionR = (String) session.getAttribute("r");
+                                for (String option : options) { %>
+
+                            <option <%=(option.equals(sessionR)?"selected":"")%>><%=option%></option>
+
+                            <% }%>
+
+<%--                            <option>1</option>--%>
+<%--                            <option>2</option>--%>
+<%--                            <option>3</option>--%>
+<%--                            <option>4</option>--%>
+<%--                            <option>5</option>--%>
                         </select>
                     </div>
                 </div>
@@ -196,15 +211,21 @@
                     <th class="hitres-col">Hit result</th>
                 </tr>
                 </thead>
-                <% for (EntryBean entryBean: tableRows.getEntryBeansContainer()) { %>
-                    <tr>
-                        <td><%= entryBean.getX()%></td>
-                        <td><%= entryBean.getY()%></td>
-                        <td><%= entryBean.getR()%></td>
-                        <td><%= entryBean.getCurrentTime()%></td>
-                        <td><%= entryBean.getExecTime()%></td>
-                        <td><%= entryBean.isHit()%></td>
-                    </tr>
+                <% for (EntryBean entryBean : tableRows.getEntryBeansContainer()) { %>
+                <tr>
+                    <td><%= entryBean.getX()%>
+                    </td>
+                    <td><%= entryBean.getY()%>
+                    </td>
+                    <td><%= entryBean.getR()%>
+                    </td>
+                    <td><%= entryBean.getCurrentTime()%>
+                    </td>
+                    <td><%= entryBean.getExecTime()%>
+                    </td>
+                    <td><%= entryBean.isHit()%>
+                    </td>
+                </tr>
                 <%}%>
 
             </table>

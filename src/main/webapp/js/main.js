@@ -2,6 +2,8 @@ $(function () {
 
     const MAX_X = 5;
     const MIN_X = -3;
+    const MAX_Y = 5;
+    const MIN_Y = -3;
 
     function isNumber(number) {
         return !isNaN(number) && isFinite(number);
@@ -13,10 +15,10 @@ $(function () {
 
         if (isNumber(x) && x >= MIN_X && x <= MAX_X) {
 
-            input.removeClass("input-error");
+            //input.removeClass("input-error");
             return true;
         }
-        input.addClass("input-error");
+        //input.addClass("input-error");
         return false;
     }
 
@@ -24,7 +26,7 @@ $(function () {
 
         let graphMode = $(".graph_point_info").val();
         let y = parseFloat($("#graph-y").val());
-        if (graphMode === "true" && isNumber(y)) {
+        if (graphMode === "true" && isNumber(y) && y >= MIN_Y && y <= MAX_Y) {
             return true;
         }
         return $("input[type='radio']").is(":checked");
@@ -32,6 +34,7 @@ $(function () {
     }
 
     function validateData() {
+        //alert(validateX() + " " + validateY());
 
         return validateX() & validateY();
     }
@@ -165,6 +168,10 @@ $(function () {
 
     $("#yradio").on("change", function () {
         drawDot($("#dot"), getX(), getY(), getR());
+    })
+
+    $("button.submit").on("click", function (event) {
+        if (!validateData()) event.preventDefault();
     })
 
 });
