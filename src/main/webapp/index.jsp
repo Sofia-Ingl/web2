@@ -31,7 +31,6 @@
                 <span>Areas</span>
             </div>
             <div id="image-container">
-                <canvas class="graph-canvas" width="300" height="240"></canvas>
                 <svg id="graph-svg" width="300" height="240" class="svg-graph" xmlns="http://www.w3.org/2000/svg">
 
                     <line class="axis" x1="0" x2="300" y1="120" y2="120" stroke="black"></line>
@@ -215,18 +214,12 @@
                 </thead>
                 <% for (EntryBean entryBean : tableRows.getEntryBeansContainer()) { %>
                 <tr>
-                    <td><%= entryBean.getX()%>
-                    </td>
-                    <td><%= entryBean.getY()%>
-                    </td>
-                    <td><%= entryBean.getR()%>
-                    </td>
-                    <td><%= entryBean.getCurrentTime()%>
-                    </td>
-                    <td><%= entryBean.getExecTime()%>
-                    </td>
-                    <td><%= entryBean.isHit()%>
-                    </td>
+                    <td><%= entryBean.getX()%></td>
+                    <td><%= entryBean.getY()%></td>
+                    <td><%= entryBean.getR()%></td>
+                    <td><%= entryBean.getCurrentTime()%></td>
+                    <td><%= entryBean.getExecTime()%></td>
+                    <td><%= entryBean.isHit()%></td>
                 </tr>
                 <%}%>
 

@@ -64,17 +64,6 @@ tr {
     max-height: 315px;
 }
 
-.graph-canvas {
-}
-
-/* мб придется потом заменить на .graph-canvas и сдвинуть канвас ниже, если не получится рисовать на нем*/
-.svg-graph {
-    position: relative;
-    left: 0;
-    right: 0;
-    top: -240px;
-}
-
 #image-container {
     text-align: center;
     overflow: hidden;
