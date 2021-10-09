@@ -184,5 +184,23 @@ $(function () {
         if (!validateData()) event.preventDefault();
     })
 
+    let prevPointColor = "black";
+
+    $("#result-table tbody tr").on("click", function () {
+        let x = parseFloat(this.cells[0].innerText);
+        let y = parseFloat(this.cells[1].innerText);
+        let {absoluteX, absoluteY} = getAbsoluteOffsetFromXYCoords(x, y, getR());
+        $("#graph-svg circle").each(function (index, circle) {
+            if (parseFloat(circle.getAttribute("cx")) === absoluteX && parseFloat(circle.getAttribute("cy")) === absoluteY) {
+                prevPointColor = circle.getAttribute("fill");
+                circle.setAttribute("fill", "#ea0037");
+            } else {
+                if (circle.getAttribute("fill")==="#ea0037") {
+                    circle.setAttribute("fill", prevPointColor);
+                }
+            }
+        })
+    });
+
 });
 
