@@ -11,16 +11,8 @@ public class ControllerServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        System.out.println("Wow I am here");
+
         Map<String, String[]> params = req.getParameterMap();
-        for (String s :
-                params.keySet()) {
-            System.out.println(s + ": ");
-            for (String val :
-                    params.get(s)) {
-                System.out.println(val);
-            }
-        }
         if (params.containsKey("clear") && params.get("clear")[0].equals("true")) {
             getServletContext().getNamedDispatcher("ClearSessionServlet").forward(req, resp);
         } else {

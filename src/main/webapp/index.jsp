@@ -80,9 +80,7 @@
                         double r = (session.getAttribute("r")==null)? 1 : Double.parseDouble((String)session.getAttribute("r"));
                         for (EntryBean entryBean : tableRows.getEntryBeansContainer()) {
                             cx = String.valueOf(150 + Math.round(entryBean.getX() * 100 / r));
-                            System.out.println(cx);
                             cy = String.valueOf(120 - Math.round(entryBean.getY() * 100 / r));
-                            System.out.println(cy);
                             fill = (r == entryBean.getR())?"#ffd200":"#3a3e40";
                     %>
 
@@ -169,12 +167,6 @@
                             <option <%=(option.equals(sessionR)?"selected":"")%>><%=option%></option>
 
                             <% }%>
-
-<%--                            <option>1</option>--%>
-<%--                            <option>2</option>--%>
-<%--                            <option>3</option>--%>
-<%--                            <option>4</option>--%>
-<%--                            <option>5</option>--%>
                         </select>
                     </div>
                 </div>
@@ -191,6 +183,11 @@
 
             </form>
 
+        </div>
+
+
+        <div id="message-block" class="content-plate">
+            <span id="info-span">Oh shit here we go again...</span>
         </div>
 
     </div>

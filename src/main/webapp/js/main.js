@@ -15,10 +15,8 @@ $(function () {
 
         if (isNumber(x) && x >= MIN_X && x <= MAX_X) {
 
-            //input.removeClass("input-error");
             return true;
         }
-        //input.addClass("input-error");
         return false;
     }
 
@@ -34,6 +32,8 @@ $(function () {
     }
 
     function validateData() {
+        let valid = validateX() & validateY();
+        if (!valid) displayMessage("Data is invalid, please check restrictions (current Y value is " + getY() + ")");
         return validateX() & validateY();
     }
 
@@ -114,8 +114,6 @@ $(function () {
     }
 
     function redrawDotsAfterRChanged() {
-        //document.querySelector("#dot").setAttribute("r", 0);
-        //drawDot($("#dot"), getX(), getY(), getR());
         document.querySelectorAll("circle.prev-dot").forEach(e => e.remove());
         let x, y, r, rNew, fill;
         let svg = document.getElementById("graph-svg");
@@ -130,13 +128,18 @@ $(function () {
         });
     }
 
+    function displayMessage(message) {
+        document.getElementById("message-block").classList.remove("disappearing");
+        document.getElementById("info-span").innerHTML = message;
+        setTimeout(() => document.getElementById("message-block").classList.add("disappearing"), 0);
+    }
+
     $("button.reset").on("click", function () {
         $(".clear_info").val("true");
     });
 
     $("#values-form").on("submit", function (event) {
         if (!validateData() && event.target.getAttribute("class").indexOf("reset") === -1) event.preventDefault();
-
     });
 
     $(".svg-graph").on("click", function (event) {

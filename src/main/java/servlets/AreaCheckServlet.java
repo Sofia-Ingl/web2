@@ -33,9 +33,6 @@ public class AreaCheckServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        System.out.println("Lol kek cheburek");
-
-        //LocalDateTime start = LocalDateTime.now();
         long start = System.nanoTime();
 
         try {
@@ -51,9 +48,8 @@ public class AreaCheckServlet extends HttpServlet {
             if (validateValues(x, y, r)) {
                 boolean isHit = checkData(x, y, r);
                 String currTime = LocalDateTime.now().format(formatter);
-                //String execTime = String.valueOf(LocalDateTime.now().toEpochSecond(ZoneOffset.UTC) - start.toEpochSecond(ZoneOffset.UTC));
                 String execTime = String.format(timeFormatLocale, "%.7f", (System.nanoTime() - start) * Math.pow(10, -9));
-                System.out.println(execTime);
+
 
                 EntryBean entry = new EntryBean(x, y, r, currTime, execTime, isHit);
                 EntryBeansContainer tableRows = (EntryBeansContainer) req.getSession().getAttribute("tableRows");
@@ -63,14 +59,7 @@ public class AreaCheckServlet extends HttpServlet {
                 }
                 tableRows.getEntryBeansContainer().add(entry);
 
-                System.out.println("Size: " + tableRows.getEntryBeansContainer().size());
-                for (EntryBean e :
-                        tableRows.getEntryBeansContainer()) {
-                    System.out.println(e);
-                }
-
                 req.getSession().setAttribute("r", String.valueOf(Math.round(r)));
-                System.out.println("R: " + req.getSession().getAttribute("r"));
             }
 
         } catch (NumberFormatException e) {
