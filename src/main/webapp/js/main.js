@@ -31,8 +31,14 @@ $(function () {
 
     }
 
+    function validateR() {
+        let r = getR();
+        return isNumber(r);
+
+    }
+
     function validateData() {
-        let valid = validateX() & validateY();
+        let valid = validateX() & validateY() & validateR();
         if (!valid) displayMessage("Data is invalid, please check restrictions (current Y value is " + getY() + ")");
         return validateX() & validateY();
     }
@@ -143,6 +149,11 @@ $(function () {
     });
 
     $(".svg-graph").on("click", function (event) {
+
+        if (!validateR()) {
+            displayMessage("R is not set, point cannot be drawn");
+            return ;
+        }
 
         let graph = document.getElementById("graph-svg");
         let boundingRect = graph.getBoundingClientRect();
