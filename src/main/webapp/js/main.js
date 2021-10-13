@@ -152,7 +152,7 @@ $(function () {
 
         if (!validateR()) {
             displayMessage("R is not set, point cannot be drawn");
-            return ;
+            return;
         }
 
         let graph = document.getElementById("graph-svg");
@@ -206,7 +206,7 @@ $(function () {
                 prevPointColor = circle.getAttribute("fill");
                 circle.setAttribute("fill", "#ea0037");
             } else {
-                if (circle.getAttribute("fill")==="#ea0037") {
+                if (circle.getAttribute("fill") === "#ea0037") {
                     circle.setAttribute("fill", prevPointColor);
                 }
             }

@@ -65,6 +65,7 @@ public class AreaCheckServlet extends HttpServlet {
         } catch (NumberFormatException e) {
             System.out.println("Inappropriate num");
         }
+
         getServletContext().getRequestDispatcher("/index.jsp").forward(req, resp);
     }
 
@@ -77,7 +78,7 @@ public class AreaCheckServlet extends HttpServlet {
     }
 
     private boolean checkTriangle(double x, double y, double r) {
-        return x <= 0 && y <= 0 && y >= -x - r/2;
+        return x <= 0 && y <= 0 && y >= -x - r / 2;
     }
 
     private boolean checkCircle(double x, double y, double r) {
@@ -86,6 +87,6 @@ public class AreaCheckServlet extends HttpServlet {
 
     private boolean validateValues(double x, double y, double r) {
         boolean areNumbers = !Double.isNaN(x) && !Double.isNaN(y) && !Double.isNaN(r);
-        return areNumbers && x<=5 && x>=-3 && y<=5 && y>=-3 && rVals.contains(r);
+        return areNumbers && x <= 5 && x >= -3 && y <= 5 && y >= -3 && rVals.contains(r);
     }
 }

@@ -1,6 +1,5 @@
 <%@ page import="beans.EntryBean" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
-<%--<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>--%>
 <jsp:useBean id="tableRows" class="beans.EntryBeansContainer" scope="session"/>
 
 <html lang="en-En">
@@ -98,7 +97,7 @@
                 <span>Form</span>
             </div>
 
-            <form id="values-form" action="${pageContext.request.contextPath}" method="GET">
+            <form id="values-form" action="<%=request.getContextPath()%>" method="GET">
 
                 <div id="x-block">
                     <div id="xlabel" class="form-labels">
