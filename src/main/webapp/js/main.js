@@ -38,9 +38,9 @@ $(function () {
     }
 
     function validateData() {
-        let valid = validateX() & validateY() & validateR();
+        let valid = validateX() && validateY() && validateR();
         if (!valid) displayMessage("Data is invalid, please check restrictions (current Y value is " + getY() + ")");
-        return validateX() & validateY();
+        return validateX() && validateY()&& validateR();
     }
 
     function getY() {
@@ -145,7 +145,7 @@ $(function () {
     });
 
     $("#values-form").on("submit", function (event) {
-        if (!validateData() && event.target.getAttribute("class").indexOf("reset") === -1) event.preventDefault();
+        if (event.target.getAttribute("class").indexOf("reset") === -1 && !validateData()) event.preventDefault();
     });
 
     $(".svg-graph").on("click", function (event) {
@@ -166,7 +166,10 @@ $(function () {
 
         let {x, y} = getXYCoordsFromAbsoluteOffset(dx, dy, r);
         setGraphModeOnForm(x, y);
-        $("button.submit").click();
+
+        if (validateData()) {
+            sendRequestWithArgs();
+        }
     });
 
 
@@ -192,8 +195,55 @@ $(function () {
     })
 
     $("button.submit").on("click", function (event) {
-        if (!validateData()) event.preventDefault();
-    })
+        event.preventDefault();
+
+        if (validateData()) {
+            sendRequestWithArgs();
+        }
+    });
+
+    $("button.reset").on("click", function (event) {
+        //if (!validateData()) event.preventDefault();
+        event.preventDefault();
+
+        sendClearRequest();
+    });
+
+    function sendRequestWithArgs() {
+        $.ajax({
+            type: 'GET',
+            url: 'controller',
+            data: {
+                'x': getX().toString(),
+                'y': getY().toString(),
+                'r': getR().toString(),
+                'graph': $(".graph_point_info").val(),
+                'graphY': getY(),
+            },
+            success: function () {
+                window.location.href = '/web2-0/index.jsp';
+            },
+            error: function () {
+                alert("Problem occured");
+            }
+        });
+    }
+
+    function sendClearRequest() {
+        $.ajax({
+            type: 'GET',
+            url: 'controller',
+            data: {
+                "clear": "true"
+            },
+            success: function () {
+                window.location.href = '/web2-0/index.jsp';
+            },
+            error: function () {
+                alert("Problem occured");
+            }
+        });
+    }
 
     let prevPointColor = "black";
 

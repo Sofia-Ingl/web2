@@ -97,7 +97,7 @@
                 <span>Form</span>
             </div>
 
-            <form id="values-form" action="<%=request.getContextPath()%>" method="GET">
+            <form id="values-form" action="" method="GET">
 
                 <div id="x-block">
                     <div id="xlabel" class="form-labels">
@@ -177,7 +177,7 @@
 
                 <div id="main-button-block">
                     <button class="main-button submit" type="submit" form="values-form">Submit</button>
-                    <button class="main-button reset" type="submit" form="values-form">Reset</button>
+                    <button class="main-button reset" type="reset" form="values-form">Reset</button>
                 </div>
 
             </form>
