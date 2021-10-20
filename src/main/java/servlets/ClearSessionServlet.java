@@ -13,10 +13,13 @@ public class ClearSessionServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+
         EntryBeansContainer tableRows = (EntryBeansContainer) req.getSession().getAttribute("tableRows");
         if (tableRows != null) {
             tableRows.getEntryBeansContainer().clear();
         }
+
+
         getServletContext().getRequestDispatcher("/index.jsp").forward(req, resp);
     }
 }

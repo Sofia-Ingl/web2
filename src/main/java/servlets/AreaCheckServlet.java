@@ -65,6 +65,7 @@ public class AreaCheckServlet extends HttpServlet {
 
         } catch (NumberFormatException e) {
             System.out.println("Inappropriate num");
+
         }
 
         getServletContext().getRequestDispatcher("/index.jsp").forward(req, resp);

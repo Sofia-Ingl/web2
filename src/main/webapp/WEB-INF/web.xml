@@ -27,4 +27,19 @@
         <servlet-name>ClearSessionServlet</servlet-name>
         <url-pattern>/clear-all</url-pattern>
     </servlet-mapping>
+
+    <error-page>
+        <exception-type>java.lang.Exception</exception-type >
+        <location>/error-page</location>
+    </error-page>
+
+    <servlet>
+        <servlet-name>ErrorHandler</servlet-name>
+        <servlet-class>servlets.ErrorHandler</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>ErrorHandler</servlet-name>
+        <url-pattern>/error-page</url-pattern>
+    </servlet-mapping>
 </web-app>
