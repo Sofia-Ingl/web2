@@ -33,7 +33,6 @@ public class AreaCheckServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-
         long start = System.nanoTime();
 
         try {
@@ -69,6 +68,7 @@ public class AreaCheckServlet extends HttpServlet {
         }
 
         getServletContext().getRequestDispatcher("/index.jsp").forward(req, resp);
+        //getServletContext().getRequestDispatcher("/table.jsp").forward(req, resp);
     }
 
     private boolean checkData(double x, double y, double r) {

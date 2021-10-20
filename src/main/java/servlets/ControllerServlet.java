@@ -13,6 +13,7 @@ public class ControllerServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         Map<String, String[]> params = req.getParameterMap();
+
         if (params.containsKey("clear") && params.get("clear")[0].equals("true")) {
             getServletContext().getNamedDispatcher("ClearSessionServlet").forward(req, resp);
         } else {

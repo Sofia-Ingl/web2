@@ -203,7 +203,6 @@ $(function () {
     });
 
     $("button.reset").on("click", function (event) {
-        //if (!validateData()) event.preventDefault();
         event.preventDefault();
 
         sendClearRequest();
