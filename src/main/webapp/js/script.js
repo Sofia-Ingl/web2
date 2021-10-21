@@ -269,8 +269,6 @@ document.addEventListener('DOMContentLoaded', function () {
         sendGetRequest(paramString);
     }
 
-    // СКОРЕЕ ВСЕГО ПРИДЕТСЯ ЗАМЕНИТЬ ПРИ ОТСУТСТВИИ ПЕРЕЗАГРУЗКИ
-
     document.querySelectorAll("#result-table tbody tr").forEach(function (row) {
         row.addEventListener("click", function () {
             let x = parseFloat(this.cells[0].innerText);
