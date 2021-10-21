@@ -37,9 +37,19 @@
         <servlet-name>ErrorHandler</servlet-name>
         <servlet-class>servlets.ErrorHandler</servlet-class>
     </servlet>
-
     <servlet-mapping>
         <servlet-name>ErrorHandler</servlet-name>
         <url-pattern>/error-page</url-pattern>
     </servlet-mapping>
+
+    <filter>
+        <filter-name>IncFilter</filter-name>
+        <filter-class>filters.IncFilter</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>IncFilter</filter-name>
+        <servlet-name>ControllerServlet</servlet-name>
+    </filter-mapping>
+
 </web-app>

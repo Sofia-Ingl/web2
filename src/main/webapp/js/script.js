@@ -236,6 +236,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
         req.open("GET", url, true);
 
+        req.setRequestHeader("X-Inc-Counter", "1.5");
+
         req.addEventListener("readystatechange", () => {
             try {
                 if (req.readyState === 4 && req.status === 200) {
