@@ -60,6 +60,7 @@ public class AreaCheckServlet extends HttpServlet {
                 tableRows.getEntryBeansContainer().add(entry);
 
                 req.getSession().setAttribute("r", String.valueOf(Math.round(r)));
+                //System.out.println(String.valueOf(req.getSession().getAttribute("r")));
             }
 
         } catch (NumberFormatException e) {
@@ -67,8 +68,11 @@ public class AreaCheckServlet extends HttpServlet {
 
         }
 
-        getServletContext().getRequestDispatcher("/index.jsp").forward(req, resp);
-        //getServletContext().getRequestDispatcher("/table.jsp").forward(req, resp);
+        if (req.getParameter("table")!=null && req.getParameter("table").equals("true")) {
+            getServletContext().getRequestDispatcher("/table.jsp").forward(req, resp);
+        } else {
+            getServletContext().getRequestDispatcher("/index.jsp").forward(req, resp);
+        }
     }
 
     private boolean checkData(double x, double y, double r) {
