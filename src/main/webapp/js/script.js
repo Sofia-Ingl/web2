@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     let dot = document.getElementById("dot");
     let prevPointColor = "black";
+    let curPointColor = "black";
 
     function isNumber(number) {
         return !isNaN(number) && isFinite(number);
@@ -276,14 +277,16 @@ document.addEventListener('DOMContentLoaded', function () {
             let {absoluteX, absoluteY} = getAbsoluteOffsetFromXYCoords(x, y, getR());
             document.querySelectorAll("#graph-svg circle").forEach(function (circle, index) {
                 if (parseFloat(circle.getAttribute("cx")) === absoluteX && parseFloat(circle.getAttribute("cy")) === absoluteY) {
-                    prevPointColor = circle.getAttribute("fill");
+                    if (circle.getAttribute("fill") !== "#ea0037") curPointColor = circle.getAttribute("fill");
                     circle.setAttribute("fill", "#ea0037");
                 } else {
                     if (circle.getAttribute("fill") === "#ea0037") {
                         circle.setAttribute("fill", prevPointColor);
+                        prevPointColor = curPointColor;
                     }
                 }
             })
+            prevPointColor = curPointColor;
         });
     })
 
