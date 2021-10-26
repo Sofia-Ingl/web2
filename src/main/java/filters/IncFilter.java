@@ -34,6 +34,7 @@ public class IncFilter implements Filter {
                 double valToAdd = Double.parseDouble(httpReq.getHeader(header));
                 counter += valToAdd;
                 context.setAttribute("counter", counter);
+                System.out.println(String.valueOf(context.getAttribute("counter")));
                 locker.unlock();
                 break;
 

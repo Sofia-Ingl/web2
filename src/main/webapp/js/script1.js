@@ -65,7 +65,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         req.open("GET", url, true);
 
-        //req.setRequestHeader("X-Inc-Counter", "1.5");
+        req.setRequestHeader("X-Inc-Counter", r.toString());
 
         req.addEventListener("readystatechange", () => {
             try {
