@@ -30,25 +30,6 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
 
-    function sendGetRequestAndReloadPage(paramStringToAdd) {
-
-        let req = getXmlHttpReq();
-        let url = 'controller?' + paramStringToAdd;
-        req.open("GET", url, true);
-        //req.setRequestHeader("X-Inc-Counter", "1.5");
-
-        req.addEventListener("readystatechange", () => {
-            try {
-                if (req.readyState === 4 && req.status === 200) {
-                    window.location.href = '/web2-0/index.jsp';
-                }
-            } catch (e) {
-                alert("Error occurred: " + e);
-            }
-        });
-        req.send();
-    }
-
     function sendRequestAndRenewDynamicParts() {
         let req = getXmlHttpReq();
 
@@ -73,7 +54,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
                     document.getElementById("table-scroll-container").innerHTML = req.response;
                     let {absoluteX, absoluteY} = getAbsoluteOffsetFromXYCoords(x, y, r);
-                    //svg.insertAdjacentHTML('beforeend', `<circle r="3" cx=${absoluteX} cy=${absoluteY} class="prev-dot" fill="#ffd200"></circle>`)
                     addTableRowEventListeners();
                     redrawDotsAfterRChanged();
 
@@ -88,11 +68,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function sendClearHttpRequest() {
         let paramString = 'clear=true';
-        //sendGetRequestAndReloadPage(paramString);
         let req = getXmlHttpReq();
         let url = 'controller?' + paramString;
         req.open("GET", url, true);
-        //req.setRequestHeader("X-Inc-Counter", "1.5");
 
         req.addEventListener("readystatechange", () => {
             try {
@@ -102,8 +80,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         obj.remove();
                     });
                     document.getElementById("table-scroll-container").innerHTML = "";
-                    
-                    //window.location.href = '/web2-0/index.jsp';
+
                 }
             } catch (e) {
                 alert("Error occurred: " + e);
