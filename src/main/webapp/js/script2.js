@@ -73,9 +73,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
                     document.getElementById("table-scroll-container").innerHTML = req.response;
                     let {absoluteX, absoluteY} = getAbsoluteOffsetFromXYCoords(x, y, r);
-                    svg.insertAdjacentHTML('beforeend', `<circle r="3" cx=${absoluteX} cy=${absoluteY} class="prev-dot" fill="#ffd200"></circle>`)
+                    //svg.insertAdjacentHTML('beforeend', `<circle r="3" cx=${absoluteX} cy=${absoluteY} class="prev-dot" fill="#ffd200"></circle>`)
                     addTableRowEventListeners();
-
+                    redrawDotsAfterRChanged();
 
                 }
             } catch (e) {

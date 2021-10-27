@@ -1,6 +1,7 @@
 package beans;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 public class EntryBean implements Serializable {
 
@@ -87,5 +88,23 @@ public class EntryBean implements Serializable {
                 ", execTime='" + execTime + '\'' +
                 ", isHit=" + isHit +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof EntryBean)) return false;
+        EntryBean entryBean = (EntryBean) o;
+        return Double.compare(entryBean.getX(), getX()) == 0 &&
+                Double.compare(entryBean.getY(), getY()) == 0 &&
+                Double.compare(entryBean.getR(), getR()) == 0 &&
+                isHit() == entryBean.isHit() &&
+                Objects.equals(getCurrentTime(), entryBean.getCurrentTime()) &&
+                Objects.equals(getExecTime(), entryBean.getExecTime());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getX(), getY(), getR(), getCurrentTime(), getExecTime(), isHit());
     }
 }

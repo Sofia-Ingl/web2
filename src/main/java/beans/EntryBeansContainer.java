@@ -2,6 +2,7 @@ package beans;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class EntryBeansContainer {
 
@@ -21,5 +22,25 @@ public class EntryBeansContainer {
 
     public void setEntryBeansContainer(List<EntryBean> entryBeansContainer) {
         this.entryBeansContainer = entryBeansContainer;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof EntryBeansContainer)) return false;
+        EntryBeansContainer that = (EntryBeansContainer) o;
+        return Objects.equals(getEntryBeansContainer(), that.getEntryBeansContainer());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getEntryBeansContainer());
+    }
+
+    @Override
+    public String toString() {
+        return "EntryBeansContainer{" +
+                "entryBeansContainer=" + entryBeansContainer +
+                '}';
     }
 }

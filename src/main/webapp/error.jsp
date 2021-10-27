@@ -1,10 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Home
-  Date: 14.10.2021
-  Time: 19:26
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html lang="en-En">
 
@@ -55,7 +48,7 @@
 
 
     <div id="error-container" class="grey">
-        <span class="black">Ya ne very!</span>
+        <span class="black">Error! Blessed and depressed</span>
     </div>
 
 </div>
